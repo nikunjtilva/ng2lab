@@ -1,33 +1,24 @@
-import { Component } from '@angular/core';
-import { Hero } from './hero';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component'
+import { Component, OnInit } from '@angular/core';
+import { HeroService } from './hero.service';
+import { ROUTER_DIRECTIVES } from '@angular/router'
 @Component({
-  moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives:[HeroDetailComponent]
+    moduleId: module.id,
+    selector: 'my-app',
+    template:`
+    <h1>{{title}}</h1>
+  <nav>
+    <a [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+    <a [routerLink]="['/heroes']" routerLinkActive="active">Heroes</a>
+  </nav>
+  <router-outlet></router-outlet>
+    `,
+    directives:[ROUTER_DIRECTIVES]
 })
+export class AppComponent implements OnInit {
+    constructor() { }
 
-export class AppComponent {
-  title = 'Tour of Heroes!';
-  selectedHero : Hero ;
-public heroes = HEROES;
+    ngOnInit() { }
 
-onSelect(hero: Hero){
-  this.selectedHero = hero;
+    title = "Tour of Heroes";
+
 }
-}
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
